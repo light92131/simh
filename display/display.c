@@ -755,6 +755,9 @@ display_point(int x,        /* 0..xpixels (unscaled) */
     if (!initialized && !display_init(DISPLAY_TYPE, PIX_SCALE, NULL))
         return 0;
 
+    if (display_type == DIS_VR14)
+        y = ((y << 1) + y) >> 2;  /* y += 3/4 */
+
     /* scale x and y to the displayed number of pixels */
     /* handle common cases quickly */
     if (scale > 1) {
